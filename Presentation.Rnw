@@ -1,0 +1,288 @@
+\documentclass[pdf, t, 10pt]{beamer}
+\usetheme{Antibes}
+\mode<presentation>{}
+
+% Remove navigation symbols, show slide number
+\beamertemplatenavigationsymbolsempty
+\setbeamercolor{page number in head/foot}{fg=black}
+\setbeamerfont{page number in head/foot}{size=\normalsize}
+\setbeamertemplate{footline}[frame number]
+
+%math symbols
+\usepackage{amssymb, amsmath, amsthm}
+
+%stretch cases brace
+\usepackage{mathtools}
+
+%font
+\usepackage{mathpazo}
+
+%make " quotation marks 
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\MakeOuterQuote{"}
+
+% for side-by-side plot and table
+\usepackage[font=small,labelfont=bf]{caption}
+
+%appropriate spacing after commas
+\usepackage{icomma}
+
+\usepackage{hyperref}
+\urlstyle{same}
+
+%%preamble
+\title{Statistical Pitfalls in a Data Career}
+\author{Yeng M. Miller-Chang}
+\date{March 19, 2019}
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{About Me}
+\begin{itemize}
+\item Research Analysis Specialist, Office of Research and Planning (2nd floor, by Java Junction), C2105
+\begin{itemize}
+\item Serve employees and students by supporting evidence-based decision making
+\end{itemize}
+\item Business cards
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Four Statistical Pitfalls in the Professional World}
+Things that you should \textbf{never} do with statistics:
+\begin{enumerate}
+\item \pause Rely on only one statistic to make decisions
+\item \pause Assume that all data are normally distributed (bell-shape curve)
+\item \pause Assume that trends that apply to a larger group apply to a smaller group
+\item \pause Assume that machine learning (data science, artificial intelligence, etc.) is a magic bullet
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+The simplest way this pitfall appears is usually in the form of averages.
+
+\pause 
+Consider two data sets:
+\begin{center}
+Data set 1: 50 ones, 50 tens
+
+Data set 2: 20 fives
+\end{center}
+These both have an average of $5$, but these data sets look significantly different (in values and in sample size)!
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+Let's put this in a real-world context. 
+\begin{itemize}
+\item Suppose you're a manager of a retail store. You're trying to implement a change to cashier training.\pause
+\item You survey customers before and after the training, and ask them to rate their experience with their cashiers on a scale from 1 to 5: 1 being worst, 5 being best.\pause
+\item Many customers decline to take your survey, and the best you can get is the following:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+ & Number responded to survey & Average Rating \\
+ \hline
+Pre-Training & 50 & 3.5 \\
+Post-Training & 25 & 3.75 \\
+\hline
+\end{tabular}
+\end{center}\pause
+Did the cashier training improve customer interaction?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+ & Number responded to survey & Average Rating \\
+ \hline
+Pre-Training & 50 & 3.5 \\
+Post-Training & 25 & 3.75 \\
+\hline
+\end{tabular}
+\end{center}\pause
+
+The averages are not comparable: the post-training sample is half the size of the pre-training sample!
+\begin{itemize}
+\item Why does this matter?\pause 
+\begin{itemize}
+\item Integer scales (or "Likert scales") are subject to \textbf{measurement error}: it is difficult to explain the difference between why one would choose a 2 over a 3, for example.\pause 
+\item If \textbf{one person} changed their rating by one point in the pre-training survey, it would change the average by 0.02, as opposed to 0.04 in the post-test survey! \pause 
+\item A person in the post-training survey has \textbf{twice the influence on the average} than a person in the pre-training survey!\pause 
+\item All it would take to get the difference of 0.25 in the averages would be seven people in the post-training survey scoring one point less than what they stated in the survey (completely plausible).
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\textbf{More exploration, outside of just comparing averages, needs to be done}. \pause If we return to our previous two data sets:
+\begin{center}
+Data set 1: 50 ones, 50 tens
+
+Data set 2: 20 fives
+\end{center}
+one could also look at the standard deviation of the two data sets. 
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{center}
+Data set 1: 50 ones, 50 tens
+
+Data set 2: 20 fives
+\end{center}
+The \textbf{standard deviation} is a metric used to roughly determine how far a data point is, on average, from the mean. It is generally used to measure how spread out data sets are.
+
+\vspace{0.2cm}
+The standard deviation of data set 1 is larger than that of data set 2. Notice that the points in data set 1 are more spread out than those of data set 2.
+
+\vspace{0.2cm}
+If these two data sets represented pre- (data set 1) and post-training ratings of cashiers, one \textit{could} conclude that post-training ratings are better because of the smaller standard deviation.\footnote{Although I would not recommmend it in such a situation.}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\textbf{Anscombe's Quartet}: four datasets with the same $x$-means, $x$-standard deviations, $y$-means, $y$-standard deviations\footnote{The correlation coefficients, $R^2$s, and OLS regression lines are also (essentially) the same! Sources: \url{https://gist.github.com/ericbusboom}, Wikipedia}
+<<echo=FALSE, fig.width=4.5, fig.height=2.3, fig.align='center'>>=
+library(ggplot2)
+anscombe <- read.csv("https://gist.githubusercontent.com/ericbusboom/b2ac1d366c005cd2ed8c/raw/c92c66e43d144fa9c29dbd602d5af6988e8db533/anscombes.csv")
+ggplot(anscombe, aes(x = x, y = y)) + 
+  geom_point() +
+  facet_wrap(~ dataset) +
+  theme_bw() +
+  scale_x_continuous(limits = c(4, 20),
+                     breaks = seq(4, 20, by = 4)) +
+  scale_y_continuous(limits = c(2, 16),
+                     breaks = seq(2, 16, by = 4))
+@
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\textbf{Datasaurus Dozen}:\footnote{\url{https://www.autodeskresearch.com/publications/samestats}} 
+\begin{center}
+\includegraphics[scale=0.4]{Datasaurus.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\textbf{Correlation coefficient} (for \textbf{linear model} fit):\footnote{\url{https://en.wikipedia.org/wiki/File:Correlation\_examples.png}}
+\begin{center}
+\includegraphics[scale=0.4]{Correlation_examples.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\textbf{The use of a few statistics is not sufficient to adequately explain the differences between data sets}!
+
+\vspace{0.2cm}
+But... we don't have time to compute absoultely every possible statistic. For practical purposes, how to deal with this problem?\pause
+\begin{enumerate}
+\item Have the \textbf{domain knowledge} to understand where to focus your statistics. Do you understand the question of interest well enough so that you can focus your analysis?\pause
+\item Understand the \textbf{limitations of your metrics}. Averages are sensitive to measurement error and sample size.\pause
+\item Have the domain knowledge to understand what metrics are \textbf{best communicated}, given the situation.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\textbf{When U.S. air force discovered the flaw of averages}:\footnote{\url{https://www.thestar.com/news/insight/2016/01/16/when-us-air-force-discovered-the-flaw-of-averages.html}}
+
+\vspace{0.2cm}
+"In the late 1940s, the United States air force had a serious problem: its pilots could not keep control of their planes."
+
+\vspace{0.2cm}
+"Back in 1926, when the army was designing its first-ever cockpit, engineers had measured the physical dimensions of hundreds of male pilots... and used this data to standardize the dimensions of the cockpit. For the next three decades, the size and shape of the seat, the distance to the pedals and stick, the height of the windshield, even the shape of the flight helmets were all built to conform to the average dimensions of a 1926 pilot."
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+"So when the air force put him to work measuring pilots, Daniels harboured a private conviction about averages that rejected almost a century of military design philosophy. As he sat in the Aero Medical Laboratory measuring hands, legs, waists and foreheads, he kept asking himself the same question in his head: \textit{How many pilots really were average?}"
+
+\vspace{0.2cm}
+"The scientists also expected that a sizable number of pilots would be within the average range on all 10 dimensions. But even Daniels was stunned when he tabulated the actual number.
+
+\vspace{0.2cm}
+Zero.
+
+\vspace{0.2cm}
+Out of 4,063 pilots, not a single airman fit within the average range on all 10 dimensions."
+
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\textbf{Changing the data to get a "better" prediction}:\footnote{\url{https://stats.stackexchange.com/q/185507/46427}}
+\begin{center}
+\includegraphics[scale=0.4]{Sorting.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{minipage}{\textwidth}
+\begin{minipage}[t]{0.49\textwidth}
+
+\vspace{0.2cm}
+\centering
+\begin{tabular}[t]{rrr}
+  \hline
+Year & Profit \\ 
+  \hline
+  1 & 500  \\ 
+    2 & 485  \\ 
+    3 & 520  \\ 
+    4 & 545  \\ 
+   \hline
+\end{tabular}
+
+    \end{minipage}
+    \hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering
+<<echo = FALSE, fig.width=3, fig.height=3.2>>=
+df <- data.frame(Year = c(1, 2, 3, 4),
+                 Profit = c(500, 485, 520, 545),
+                 stringsAsFactors = FALSE)
+p <- ggplot(df, aes(x = Year, y = Profit)) + 
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  theme_bw() + 
+  scale_y_continuous(limits = c(400, 600), breaks = seq(400, 600, 50)) + 
+  xlab("Year") + 
+  ylab("Profit")
+r <- sqrt(summary(lm(Profit ~ Year, data = df))$r.squared)
+p
+@
+$R = $\Sexpr{r}
+  \end{minipage}
+  \end{minipage}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic to make decisions}
+After "sorting:"
+<<echo = FALSE, fig.width=3.5, fig.height=2.5>>=
+df <- data.frame(Year = c(1, 2, 3, 4),
+                 Profit = sort(c(500, 485, 520, 545)),
+                 stringsAsFactors = FALSE)
+p <- ggplot(df, aes(x = Year, y = Profit)) + 
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  theme_bw() + 
+  scale_y_continuous(limits = c(400, 600), breaks = seq(400, 600, 50)) + 
+  xlab("Year") + 
+  ylab("Profit")
+r <- sqrt(summary(lm(Profit ~ Year, data = df))$r.squared)
+p
+@
+$R = $\Sexpr{r}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+Thank you for attending this presentation!
+
+\vspace{0.2cm}
+Any questions?
+\end{center}
+\end{frame}
+
+\end{document}
