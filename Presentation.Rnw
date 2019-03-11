@@ -32,7 +32,7 @@
 \urlstyle{same}
 
 %%preamble
-\title{Statistical Pitfalls in a Data Career}
+\title{Statistical Pitfalls in Data Careers}
 \author{Yeng M. Miller-Chang}
 \date{March 19, 2019}
 \begin{document}
@@ -53,14 +53,14 @@
 \begin{frame}{Four Statistical Pitfalls in the Professional World}
 Things that you should \textbf{never} do with statistics:
 \begin{enumerate}
-\item \pause Rely on only one statistic to make decisions
+\item \pause Rely on only one statistic or procedure to make decisions
 \item \pause Assume that all data are normally distributed (bell-shape curve)
 \item \pause Assume that trends that apply to a larger group apply to a smaller group
-\item \pause Assume that machine learning (data science, artificial intelligence, etc.) is a magic bullet
+\item \pause Assume that machine learning (data science, artificial intelligence, predictive analytics, etc.) is a magic bullet
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 The simplest way this pitfall appears is usually in the form of averages.
 
 \pause 
@@ -73,19 +73,19 @@ Data set 2: 20 fives
 These both have an average of $5$, but these data sets look significantly different (in values and in sample size)!
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 Let's put this in a real-world context. 
 \begin{itemize}
 \item Suppose you're a manager of a retail store. You're trying to implement a change to cashier training.\pause
-\item You survey customers before and after the training, and ask them to rate their experience with their cashiers on a scale from 1 to 5: 1 being worst, 5 being best.\pause
+\item You survey customers before and after the training, and ask them to rate their experience with their cashiers on a scale from 1 to 10: 1 being worst, 10 being best.\pause
 \item Many customers decline to take your survey, and the best you can get is the following:
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
  & Number responded to survey & Average Rating \\
  \hline
-Pre-Training & 50 & 3.5 \\
-Post-Training & 25 & 3.75 \\
+Pre-Training & 50 & 5.5 \\
+Post-Training & 25 & 5.75 \\
 \hline
 \end{tabular}
 \end{center}\pause
@@ -93,14 +93,14 @@ Did the cashier training improve customer interaction?
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
  & Number responded to survey & Average Rating \\
  \hline
-Pre-Training & 50 & 3.5 \\
-Post-Training & 25 & 3.75 \\
+Pre-Training & 50 & 5.5 \\
+Post-Training & 25 & 5.75 \\
 \hline
 \end{tabular}
 \end{center}\pause
@@ -109,7 +109,7 @@ The averages are not comparable: the post-training sample is half the size of th
 \begin{itemize}
 \item Why does this matter?\pause 
 \begin{itemize}
-\item Integer scales (or "Likert scales") are subject to \textbf{measurement error}: it is difficult to explain the difference between why one would choose a 2 over a 3, for example.\pause 
+\item Integer scales (or "Likert scales") are subject to \textbf{measurement error}: it is difficult to explain the difference between why one would choose a 4 over a 5, for example.\pause 
 \item If \textbf{one person} changed their rating by one point in the pre-training survey, it would change the average by 0.02, as opposed to 0.04 in the post-test survey! \pause 
 \item A person in the post-training survey has \textbf{twice the influence on the average} than a person in the pre-training survey!\pause 
 \item All it would take to get the difference of 0.25 in the averages would be seven people in the post-training survey scoring one point less than what they stated in the survey (completely plausible).
@@ -119,7 +119,7 @@ The averages are not comparable: the post-training sample is half the size of th
 \end{frame}
 
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 \textbf{More exploration, outside of just comparing averages, needs to be done}. \pause If we return to our previous two data sets:
 \begin{center}
 Data set 1: 50 ones, 50 tens
@@ -129,7 +129,7 @@ Data set 2: 20 fives
 one could also look at the standard deviation of the two data sets. 
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 \begin{center}
 Data set 1: 50 ones, 50 tens
 
@@ -141,11 +141,11 @@ The \textbf{standard deviation} is a metric used to roughly determine how far a 
 The standard deviation of data set 1 is larger than that of data set 2. Notice that the points in data set 1 are more spread out than those of data set 2.
 
 \vspace{0.2cm}
-If these two data sets represented pre- (data set 1) and post-training ratings of cashiers, one \textit{could} conclude that post-training ratings are better because of the smaller standard deviation.\footnote{Although I would not recommmend it in such a situation.}
+If these two data sets represented pre- (data set 1) and post-training ratings of cashiers, one \textit{could} conclude that post-training ratings are better because of the smaller standard deviation.\footnote{Although I would not recommend it in such a situation.}
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
-\textbf{Anscombe's Quartet}: four datasets with the same $x$-means, $x$-standard deviations, $y$-means, $y$-standard deviations\footnote{The correlation coefficients, $R^2$s, and OLS regression lines are also (essentially) the same! Sources: \url{https://gist.github.com/ericbusboom}, Wikipedia}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
+\textbf{Anscombe's Quartet}: four data sets with the same $x$-means, $x$-standard deviations, $y$-means, $y$-standard deviations\footnote{The correlation coefficients, $R^2$s, and OLS regression lines are also (essentially) the same! Sources: \url{https://gist.github.com/ericbusboom}, Wikipedia}
 <<echo=FALSE, fig.width=4.5, fig.height=2.3, fig.align='center'>>=
 library(ggplot2)
 anscombe <- read.csv("https://gist.githubusercontent.com/ericbusboom/b2ac1d366c005cd2ed8c/raw/c92c66e43d144fa9c29dbd602d5af6988e8db533/anscombes.csv")
@@ -160,34 +160,30 @@ ggplot(anscombe, aes(x = x, y = y)) +
 @
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
-\textbf{Datasaurus Dozen}:\footnote{\url{https://www.autodeskresearch.com/publications/samestats}} 
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
+\textbf{Datasaurus Dozen}:\footnote{
+Matejka, J. and Fitzmaurice, G. (2017), "Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing," \textit{Autodesk Research}, \url{https://www.autodeskresearch.com/publications/samestats}} 
 \begin{center}
-\includegraphics[scale=0.4]{Datasaurus.png}
+\includegraphics[scale=0.35]{Datasaurus.png}
 \end{center}
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
-\textbf{Correlation coefficient} (for \textbf{linear model} fit):\footnote{\url{https://en.wikipedia.org/wiki/File:Correlation\_examples.png}}
-\begin{center}
-\includegraphics[scale=0.4]{Correlation_examples.png}
-\end{center}
-\end{frame}
-
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 \textbf{The use of a few statistics is not sufficient to adequately explain the differences between data sets}!
 
 \vspace{0.2cm}
-But... we don't have time to compute absoultely every possible statistic. For practical purposes, how to deal with this problem?\pause
+But... we don't have time to compute absolutely every possible statistic. For practical purposes, how to deal with this problem?\pause
 \begin{enumerate}
 \item Have the \textbf{domain knowledge} to understand where to focus your statistics. Do you understand the question of interest well enough so that you can focus your analysis?\pause
 \item Understand the \textbf{limitations of your metrics}. Averages are sensitive to measurement error and sample size.\pause
-\item Have the domain knowledge to understand what metrics are \textbf{best communicated}, given the situation.
+\item Have the domain knowledge to understand what metrics are \textbf{best communicated}, given the situation.\pause
+\item Spend a substantial time doing \textbf{exploratory data analysis (EDA)} to understand the structure of your data.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
-\textbf{When U.S. air force discovered the flaw of averages}:\footnote{\url{https://www.thestar.com/news/insight/2016/01/16/when-us-air-force-discovered-the-flaw-of-averages.html}}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
+\textbf{When U.S. air force discovered the flaw of averages}:\footnote{
+Rose, T. (2016), "When U.S. air force discovered the flaw of averages," \textit{The Star}, \url{https://www.thestar.com/news/insight/2016/01/16/when-us-air-force-discovered-the-flaw-of-averages.html}}
 
 \vspace{0.2cm}
 "In the late 1940s, the United States air force had a serious problem: its pilots could not keep control of their planes."
@@ -196,7 +192,7 @@ But... we don't have time to compute absoultely every possible statistic. For pr
 "Back in 1926, when the army was designing its first-ever cockpit, engineers had measured the physical dimensions of hundreds of male pilots... and used this data to standardize the dimensions of the cockpit. For the next three decades, the size and shape of the seat, the distance to the pedals and stick, the height of the windshield, even the shape of the flight helmets were all built to conform to the average dimensions of a 1926 pilot."
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 "So when the air force put him to work measuring pilots, Daniels harboured a private conviction about averages that rejected almost a century of military design philosophy. As he sat in the Aero Medical Laboratory measuring hands, legs, waists and foreheads, he kept asking himself the same question in his head: \textit{How many pilots really were average?}"
 
 \vspace{0.2cm}
@@ -210,14 +206,21 @@ Out of 4,063 pilots, not a single airman fit within the average range on all 10 
 
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 \textbf{Changing the data to get a "better" prediction}:\footnote{\url{https://stats.stackexchange.com/q/185507/46427}}
 \begin{center}
-\includegraphics[scale=0.4]{Sorting.png}
+\includegraphics[scale=0.5]{Sorting.png}
 \end{center}
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
+\textbf{Correlation coefficient} $R$ (for \textbf{linear model} fit):\footnote{\url{https://en.wikipedia.org/wiki/File:Correlation\_examples.png}}
+\begin{center}
+\includegraphics[scale=0.4]{Correlation_examples.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 \begin{minipage}{\textwidth}
 \begin{minipage}[t]{0.49\textwidth}
 
@@ -257,9 +260,29 @@ $R = $\Sexpr{r}
   \end{minipage}
 \end{frame}
 
-\begin{frame}{Reliance on only one statistic to make decisions}
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
 After "sorting:"
-<<echo = FALSE, fig.width=3.5, fig.height=2.5>>=
+\begin{minipage}{\textwidth}
+\begin{minipage}[t]{0.49\textwidth}
+
+\vspace{0.2cm}
+\centering
+\begin{tabular}[t]{rrr}
+  \hline
+Year & Profit \\ 
+  \hline
+  1 & 485  \\ 
+    2 & 500  \\ 
+    3 & 520  \\ 
+    4 & 545  \\ 
+   \hline
+\end{tabular}
+
+    \end{minipage}
+    \hfill
+  \begin{minipage}[t]{0.49\textwidth}
+    \centering
+<<echo = FALSE, fig.width=3, fig.height=3.2>>=
 df <- data.frame(Year = c(1, 2, 3, 4),
                  Profit = sort(c(500, 485, 520, 545)),
                  stringsAsFactors = FALSE)
@@ -274,8 +297,151 @@ r <- sqrt(summary(lm(Profit ~ Year, data = df))$r.squared)
 p
 @
 $R = $\Sexpr{r}
+  \end{minipage}
+  \end{minipage}
 \end{frame}
 
+\begin{frame}{Reliance on only one statistic/procedure to make decisions}
+On EDA:\footnote{https://medium.com/@InDataLabs/why-start-a-data-science-project-with-exploratory-data-analysis-f90c0efcbe49}
+\begin{center}
+\includegraphics[scale=0.45]{EDA.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Assuming that all data are normally distributed}
+"All models are wrong; some models are useful." (George E. P. Box)\footnote{Box et al. (2005), \textit{Statistics for Experimenters} (2\textsuperscript{nd} ed.), Hoboken, NJ: John Wiley \& Sons}
+<<echo = FALSE, fig.width=4, fig.height=2.5, fig.align='center'>>=
+ggplot(data.frame(x = c(-3, 3)), aes(x = x)) + 
+  stat_function(fun = dnorm, color = "blue") + 
+  scale_x_continuous(limits = c(-3, 3), 
+                     breaks = seq(-3, 3, by = 1),
+                     minor_breaks = NULL) +
+  scale_y_continuous(limits = c(0, 0.4),
+                     breaks = seq(0, 0.4, by = 0.1),
+                     minor_breaks = NULL) +
+  theme_bw()
+@
+\end{frame}
+
+\begin{frame}{Assuming that all data are normally distributed}
+Common misconception: large sample ($n > 30$) $\implies$ normality:\footnote{\url{https://www.researchgate.net/post/If_I_have_a_big_sample_size_is_it_acceptable_to_assume_that_data_is_normally_distributed}}
+\begin{center}
+\includegraphics[scale=0.5]{normal-large-sample-1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Assuming that all data are normally distributed}
+Common misconception: large sample ($n > 30$) $\implies$ normality:\footnote{\url{https://socratic.org/questions/5640dd3f581e2a6f21bb1f0a}} (the answer below is based on this misconception)
+\begin{center}
+\includegraphics[scale=0.45]{normal-large-sample-2.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Assuming that all data are normally distributed}
+Why do stats courses emphasize the normal distribution so much? \pause
+\begin{itemize}
+\item It is a \textbf{mathematically convenient} distribution: sums and differences of (jointly) normal distributions are also normally distributed, which is \textbf{not} the case for many distributions.\pause
+\item It justifies the \textbf{rationale for many statistical procedures} (e.g., least-squares regression lines).\pause 
+\item Central Limit Theorem: \textbf{sums} and \textbf{averages} of large samples are approximately normal for large sample sizes. This does \textbf{NOT} mean that the underlying data are normal, but only sums and averages!
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Assuming that all data are normally distributed}
+Examples of data that are \textbf{not} normally distributed:
+\begin{itemize}
+\item Website traffic (extremely skewed: a select few websites for an organization get more traffic than many other websites, especially if there's an established front page)\pause
+\item Stock prices (there are "skew-normal" distributions to try to model the volatility of stock prices more appropriately)\pause
+\item Standardized test scores (these exhibit "floor" and "ceiling" effects; there are significant populations that perform very poorly or very well)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Assuming that all data are normally distributed}
+Misconceptions related to the assumption that all data are normally distributed:\pause
+\begin{itemize}
+\item Mean = median = mode\pause
+\item Any distribution can be completely described by the mean and standard deviation (true for normal, false everywhere else; recall the discussion on Anscombe's quartet and the Datasaurus Dozen)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Assuming that all data are normally distributed}
+Suppose $E$ represents expenses, $R$ represents revenue, and both $E$ and $R$ are normally distributed and independent. $\dfrac{E}{R}$ is called the \textbf{efficiency ratio} (how much is spent to make \$1 in revenue). What is the distribution of the efficiency ratio?
+
+\pause 
+It turns out that, with the above assumptions, the efficiency ratio $\dfrac{E}{R}$ is \textbf{not} normally distributed, has \textbf{no mean}, and has an \textbf{infinite standard deviation}!
+
+\vspace{0.2cm}
+Many of the assumptions in this section outline the need for a full background in probability.
+\end{frame}
+
+\begin{frame}{Assuming trends that apply to a larger group apply to a smaller group}
+\pause
+\only<2->{"\textbf{Simpson's paradox} arises whenever an apparent trend in data, caused by a confounding variable, can be eliminated or reversed by splitting the data into natural groups."\footnote{Reinhart A. (2005), \textit{Statistics Done Wrong: the Woefully Complete Guide}, San Francisco, CA: No Starch Press, Inc.}}
+
+\vspace{0.2cm}
+\only<3->{Sex bias in UC-Berkeley graduate admissions (Fall 1973):\footnote{Freedman et al. (2007), \textit{Statistics} (4\textsuperscript{th} ed.), W. W. Norton.; see also Wikipedia on "Simpson's Paradox"}
+\begin{center}
+\begin{tabular}{|l|r|r|r|r|}
+\hline
+ & \multicolumn{2}{|c|}{Men} & \multicolumn{2}{|c|}{Women} \\
+\hline
+ & Applicants & Admitted & Applicants & Admitted \\
+\hline
+Total & 8,442 & \textbf{44\%} & 4,321 & \textbf{35\%} \\
+\hline
+\end{tabular}
+\end{center}
+}
+\end{frame}
+
+\begin{frame}{Assuming trends that apply to a larger group apply to a smaller group}
+"[W]hen we take account of the differences \textbf{among departments} in the proportions of men and women applying to them and avoid this problem by computing a statistic on each department separately, and aggregating those statistics, the evidence for campus-wide bias in favor of men is extremely weak; on the contrary, there is evidence of bias in favor of women... The proportion of women applicants tends to be high in departments that are hard to get into and low in those that are easy to get into."\footnote{Bickel P.J., Hammel E.A., and O'Connell, J.W. (1975). "Sex Bias in Graduate Admissions: Data From Berkeley," in \textit{Science}. 187 (4175), pp. 398--404. } (emphasis added)
+
+\vspace{0.2cm}
+Again, a mix of domain knowledge and EDA can help with this problem.
+\end{frame}
+
+\begin{frame}{Assuming that machine learning is a magic bullet}
+\pause
+What do you need to run a machine learning algorithm? \pause \only<3->{Data.\footnote{Redman, T. C. (2018), "If Your Data Is Bad, Your Machine Learning Tools Are Useless," \textit{Harvard Business Review}, \url{https://hbr.org/2018/04/if-your-data-is-bad-your-machine-learning-tools-are-useless} }
+
+\vspace{0.2cm}
+\begin{center}
+\includegraphics[scale=0.5]{ML-data-quality.PNG}
+\end{center}
+}
+\end{frame}
+
+\begin{frame}{Assuming that machine learning is a magic bullet}
+"Yet today, most data fails to meet basic 'data are right' standards. Reasons range from \textbf{data creators not understanding what is expected}, to \textbf{poorly calibrated measurement gear}, to \textbf{overly complex processes, to human error}. To compensate, \textbf{data scientists cleanse the data} before training the predictive model. It is time-consuming, tedious work (\textbf{taking up to 80\% of data scientists' time}), and it's the problem data scientists complain about most. Even with such efforts, cleaning neither detects nor corrects all the errors, and as yet, there is no way to understand the impact on the predictive model. What's more, data does not always meets [\textit{sic}] 'the right data' standards, as reports of bias in facial recognition and criminal justice attest." \footnote{Redman, T. C. (2018), "If Your Data Is Bad, Your Machine Learning Tools Are Useless," \textit{Harvard Business Review}, \url{https://hbr.org/2018/04/if-your-data-is-bad-your-machine-learning-tools-are-useless} }
+\end{frame}
+
+\begin{frame}{Assuming that machine learning is a magic bullet}
+"The second issue is that once these junior people get to the market, they come in with an unrealistic set of expectations about what data science work will look like. Everyone thinks they're going to be doing machine learning, deep learning, and Bayesian simulations.
+
+\vspace{0.2cm}
+This is not their fault; this is what data science curriculums and the tech media emphasize. Not much has changed since I first glanced, starry-eyed, at Hacker News logistic regression posts many, many moons ago.
+
+\vspace{0.2cm}
+\textbf{The reality is that 'data science' has never been as much about machine learning as it has about cleaning, shaping data, and moving it from place to place}."
+\footnote{Boykis, V. (2019), "Data science is different now," \url{https://veekaybee.github.io/2019/02/13/data-science-is-different/} } (emphasis added)
+\end{frame}
+
+\begin{frame}{Assuming that machine learning is a magic bullet}
+Another problem with machine learning algorithms is that many of them do not provide easily interpretable results (interpretability vs. accuracy tradeoff). Beyond this, some of the most complicated algorithms are not understood by the vast majority of their users.\footnote{Knight, W. (2017), "The Dark Secret at the Heart of AI," \textit{MIT Technology Review}, \url{https://www.technologyreview.com/s/604087/the-dark-secret-at-the-heart-of-ai/} } 
+\begin{center}
+\includegraphics[scale=0.4]{ML-interpretability.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Solutions}
+Despite these pitfalls, they all have common solutions:\pause
+\begin{enumerate}
+\item Have the \textbf{domain knowledge} to understand where to focus your statistics. Do you understand the question of interest well enough so that you can focus your analysis?\pause
+\item Understand the \textbf{limitations of your metrics}. Averages are sensitive to measurement error and sample size. \textbf{Machine learning and AI are not limitless}.\pause
+\item Have the domain knowledge to understand what metrics are \textbf{best communicated}, given the situation.\pause
+\item Spend a substantial time doing \textbf{exploratory data analysis (EDA)} to understand the structure of your data \textbf{and cleaning your data}.
+\end{enumerate}
+\end{frame}
 \begin{frame}
 \begin{center}
 Thank you for attending this presentation!
