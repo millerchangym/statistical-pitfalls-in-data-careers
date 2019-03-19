@@ -47,6 +47,7 @@
 \item Serve employees and students by supporting evidence-based decision making
 \end{itemize}
 \item Business cards
+\item Quick announcement...
 \end{itemize}
 \end{frame}
 
