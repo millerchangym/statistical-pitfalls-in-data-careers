@@ -67,7 +67,7 @@ The simplest way this pitfall appears is usually in the form of averages.
 \pause 
 Consider two data sets:
 \begin{center}
-Data set 1: 50 ones, 50 tens
+Data set 1: 50 zeroes, 50 tens
 
 Data set 2: 20 fives
 \end{center}
@@ -78,7 +78,7 @@ These both have an average of $5$, but these data sets look significantly differ
 Let's put this in a real-world context. 
 \begin{itemize}
 \item Suppose you're a manager of a retail store. You're trying to implement a change to cashier training.\pause
-\item You survey customers before and after the training, and ask them to rate their experience with their cashiers on a scale from 1 to 10: 1 being worst, 10 being best.\pause
+\item You survey customers before and after the training, and ask them to rate their experience with their cashiers on a scale from 0 to 10: 0 being worst, 10 being best.\pause
 \item Many customers decline to take your survey, and the best you can get is the following:
 \begin{center}
 \begin{tabular}{|c|c|c|}
@@ -123,7 +123,7 @@ The averages are not comparable: the post-training sample is half the size of th
 \begin{frame}{Reliance on only one statistic/procedure to make decisions}
 \textbf{More exploration, outside of just comparing averages, needs to be done}. \pause If we return to our previous two data sets:
 \begin{center}
-Data set 1: 50 ones, 50 tens
+Data set 1: 50 zeroes, 50 tens
 
 Data set 2: 20 fives
 \end{center}
@@ -132,7 +132,7 @@ one could also look at the standard deviation of the two data sets.
 
 \begin{frame}{Reliance on only one statistic/procedure to make decisions}
 \begin{center}
-Data set 1: 50 ones, 50 tens
+Data set 1: 50 zeroes, 50 tens
 
 Data set 2: 20 fives
 \end{center}
