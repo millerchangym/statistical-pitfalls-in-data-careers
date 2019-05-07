@@ -5,8 +5,8 @@
 *.png
 *.log
 *.nav
-*.pdf
 *.snm
 *.gz
 *.toc
 *.tex
+figure
